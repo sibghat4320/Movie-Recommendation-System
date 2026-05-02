@@ -1,2 +1,8 @@
-streamlit
-requests
+streamlit==1.32.0
+requests==2.31.0
+pandas==2.2.1
+scikit-learn==1.4.1.post1
+numpy==1.26.4
+sentence-transformers==2.5.1
+pytest==8.1.1
+plotly==5.19.0
