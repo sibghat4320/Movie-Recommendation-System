@@ -13,24 +13,11 @@ def add_bg_and_github_logo():
             background-image: url("https://i.ibb.co/yNNpczC/slider-bg.jpg");
             background-size: cover;
         }}
-        .github-logo {{
-            position: absolute;
-            top: 3px;
-            right: 3px;
-            z-index: 1;
-        }}
         </style>
         """,
         unsafe_allow_html=True
     )
-    st.markdown(
-        """
-        <a href="https://github.com/priyanshu2k2">
-            <img class="github-logo" src="https://i.ibb.co/syNVjS5/pngegg.png" width="40" height="40"/>
-        </a>
-        """,
-        unsafe_allow_html=True
-    )
+
 
 add_bg_and_github_logo()
 
@@ -109,7 +96,7 @@ if st.button("🔮 Magic Recommend"):
         
         col1, col2 = st.columns([1, 4])
         with col1:
-            st.image(input_details['poster_url'], use_container_width=True)
+            st.image(input_details['poster_url'], width='stretch')
         with col2:
             st.markdown(f"**{input_details['title']}** ({input_details['release_date'][:4] if input_details['release_date'] else 'N/A'})")
             st.markdown(f"*{', '.join(input_details['genres'])}*")
@@ -139,7 +126,7 @@ if st.button("🔮 Magic Recommend"):
                     details = fetch_movie_details(rec['movie_id'])
                     
                     with col:
-                        st.image(details['poster_url'], use_container_width=True)
+                        st.image(details['poster_url'], width='stretch')
                         st.markdown(f"**{details['title']}**")
                         
                         # Similarity and Rating metrics

@@ -6,19 +6,19 @@ import streamlit as st
 TMDB_API_KEY = os.environ.get("TMDB_API_KEY")
 if not TMDB_API_KEY:
     try:
-        TMDB_API_KEY = st.secrets.get("TMDB_API_KEY")
+        TMDB_API_KEY = st.secrets.get("TMDB_API_KEY", "69496bcb6922043fd2dcd2f858ccb0d2")
     except Exception:
         # Fallback if secrets.toml doesn't exist
-        TMDB_API_KEY = None
+        TMDB_API_KEY = "69496bcb6922043fd2dcd2f858ccb0d2"
 
 if not TMDB_API_KEY:
-    st.error("TMDB_API_KEY not found. Please set it in environment variables or secrets.toml")
+    TMDB_API_KEY = "69496bcb6922043fd2dcd2f858ccb0d2"
 
 @st.cache_data(show_spinner=False, ttl=86400)
 def fetch_movie_details(movie_id):
     """Fetch complete movie details including poster, rating, overview, genres."""
     try:
-        url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={TMDB_API_KEY}&language=en-US"
+        url = f"https://api.tmdb.org/3/movie/{movie_id}?api_key={TMDB_API_KEY}&language=en-US"
         response = requests.get(url)
         response.raise_for_status()
         data = response.json()
@@ -58,7 +58,7 @@ def fetch_movie_details(movie_id):
 def fetch_movie_trailer(movie_id):
     """Fetch YouTube trailer key for a movie."""
     try:
-        url = f"https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key={TMDB_API_KEY}&language=en-US"
+        url = f"https://api.tmdb.org/3/movie/{movie_id}/videos?api_key={TMDB_API_KEY}&language=en-US"
         response = requests.get(url)
         response.raise_for_status()
         data = response.json()
@@ -74,7 +74,7 @@ def fetch_movie_trailer(movie_id):
 def fetch_trending_movies():
     """Fetch current trending movies for the homepage."""
     try:
-        url = f"https://api.themoviedb.org/3/trending/movie/week?api_key={TMDB_API_KEY}"
+        url = f"https://api.tmdb.org/3/trending/movie/week?api_key={TMDB_API_KEY}"
         response = requests.get(url)
         response.raise_for_status()
         data = response.json()
